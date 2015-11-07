@@ -5,8 +5,8 @@ TMath::DOUBLE TMath::sin(DOUBLE x)
 {
 	x = mod(x + PI, 2 * PI) - PI;
 	DOUBLE r = 0;
-	for (LONG n = 0; n <= 8L; n++) {
-		r += pow(DOUBLE(-1), n) * pow(x, 2 * n + 1) / fac(2 * n + 1);
+	for (LONG n = 0; n <= 8L; n+=2) {
+		r += pow(x, 2 * n + 1) / fac(2 * n + 1) - pow(x, 2 * n + 3) / fac(2 * n + 3);
 	}
 	return r;
 }
@@ -29,7 +29,7 @@ TMath::DOUBLE TMath::cos(DOUBLE x)
 {
 	x = mod(x + PI, 2 * PI) - PI;
 	DOUBLE r = 0;
-	for (LONG n = 0; n <= 8L; n++) {
+	for (LONG n = 0; n <= 8L; n+=2) {
 		r += pow(x, 2 * n) / fac(2 * n) - pow(x, 2 * n + 2) / fac(2 * n + 2);
 	}
 	return r;
@@ -142,7 +142,7 @@ TMath::DOUBLE TMath::ln(DOUBLE x)
 	DOUBLE r = 0;
 	for (LONG n = 0; n <= 100L; n++)
 	{
-		r += pow(x, 2 * n + 1) / (2 * n + 1);
+		r += pow(x, n + n + 1) / (n + n + 1);
 	}
 	return r * 2;
 }
