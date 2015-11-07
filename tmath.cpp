@@ -5,8 +5,8 @@ TMath::DOUBLE TMath::sin(DOUBLE x)
 {
 	x = mod(x + PI, 2 * PI) - PI;
 	DOUBLE r = 0;
-	for (LONG n = 0; n <= 8L; n+=2) {
-		r += pow(x, 2 * n + 1) / fac(2 * n + 1) - pow(x, 2 * n + 3) / fac(2 * n + 3);
+	for (LONG n = 0; n <= 16L; n+=4) {
+		r += pow(x, n + 1) / fac(n + 1) - pow(x, n + 3) / fac(n + 3);
 	}
 	return r;
 }
