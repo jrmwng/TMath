@@ -30,7 +30,7 @@ TMath::DOUBLE TMath::cos(DOUBLE x)
 	x = mod(x + PI, 2 * PI) - PI;
 	DOUBLE r = 0;
 	for (LONG n = 0; n <= 8L; n++) {
-		r += pow(DOUBLE(-1.0), n) * pow(x, 2 * n) / fac(2 * n);
+		r += pow(x, 2 * n) / fac(2 * n) - pow(x, 2 * n + 2) / fac(2 * n + 2);
 	}
 	return r;
 }
@@ -50,9 +50,9 @@ TMath::DOUBLE TMath::tan(DOUBLE x)
 TMath::DOUBLE TMath::atan(DOUBLE x)
 {
 	DOUBLE r = 0;
-	for (LONG n = 0; n <= 8; n++)
+	for (LONG n = 0; n <= 8; n+=2)
 	{
-		r += pow(DOUBLE(-1), n) * pow(x, 2 * n + 1) / (2 * n + 1);
+		r += pow(x, 2 * n + 1) / (2 * n + 1) - pow(x, 2 * n + 3) / (2 * n + 3);
 	}
 	return r;
 }
@@ -142,9 +142,9 @@ TMath::DOUBLE TMath::ln(DOUBLE x)
 	DOUBLE r = 0;
 	for (LONG n = 0; n <= 100L; n++)
 	{
-		r += 2 * pow(x, 2 * n + 1) / (2 * n + 1);
+		r += pow(x, 2 * n + 1) / (2 * n + 1);
 	}
-	return r;
+	return r * 2;
 }
 TMath::DOUBLE TMath::lg(DOUBLE x)
 {
@@ -162,7 +162,7 @@ TMath::DOUBLE TMath::log(DOUBLE n, DOUBLE x)
 TMath::DOUBLE TMath::pow(DOUBLE x, LONG n)
 {
 	DOUBLE r = 1;
-	for (LONG i = 1; i <= n; i++)
+	for (LONG i = 2; i <= n; i++)
 	{
 		r *= x;
 	}
@@ -171,7 +171,7 @@ TMath::DOUBLE TMath::pow(DOUBLE x, LONG n)
 TMath::LONG TMath::pow(LONG x, LONG n)
 {
 	LONG r = 1;
-	for (LONG i = 1; i <= n; i++)
+	for (LONG i = 2; i <= n; i++)
 	{
 		r *= x;
 	}
@@ -184,7 +184,7 @@ TMath::DOUBLE TMath::pow(DOUBLE x, DOUBLE n)
 /* ========================================== FACULTY ============================================*/
 TMath::LONG TMath::fac(LONG n) {
 	LONG r = 1;
-	for (LONG i = 1; i <= n; i++)
+	for (LONG i = 2; i <= n; i++)
 	{
 		r *= i;
 	}
