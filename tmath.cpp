@@ -29,8 +29,8 @@ TMath::DOUBLE TMath::cos(DOUBLE x)
 {
 	x = mod(x + PI, 2 * PI) - PI;
 	DOUBLE r = 0;
-	for (LONG n = 0; n <= 8L; n+=2) {
-		r += pow(x, 2 * n) / fac(2 * n) - pow(x, 2 * n + 2) / fac(2 * n + 2);
+	for (LONG n = 0; n <= 16L; n+=4) {
+		r += pow(x, n + 0) / fac(n + 0) - pow(x, n + 2) / fac(n + 2);
 	}
 	return r;
 }
